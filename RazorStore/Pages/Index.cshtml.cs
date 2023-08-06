@@ -23,7 +23,8 @@ public class IndexModel : PageModel
     public void OnGet()
     {
         Goods = db.Goods.Where(x => x.Delete == false).ToList();
-        
+        Goods = db.Goods.Where(x => x.Delete == false).ToList();
+
     }
 
 }
