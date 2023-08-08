@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using RazorStore.Model;
 
 namespace RazorStore.Services
@@ -12,7 +13,12 @@ namespace RazorStore.Services
 		}
 		public DbSet<Goods> Goods { get; set; }
 
-		
-	}
+        protected override void OnModelCreating(ModelBuilder model)
+		{
+			base.OnModelCreating(model);
+
+			model.Entity<Goods>().HasQueryFilter(x => !x.Delete);
+		}
+    }
 }
 

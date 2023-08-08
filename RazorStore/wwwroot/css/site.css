@@ -1,22 +1,113 @@
 ﻿html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+}
+
+.product-card {
+width: 200px;
+border: 1px solid #ccc;
+border-radius: 5px;
+padding: 10px;
+margin: 10px;
+text-align: center;
+}
+
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.product-card a {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
+
+.product-card {
+background-color: #f4f1f3;
+}
+
+.product-card a {
+    /* Ваши предыдущие стили */
+
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #258cfb;
+    color: #fff;
+    border-radius: 5px;
+}
+
+    .product-card a:hover {
+        background-color: #1c6db9;
+    }
+/* site.css */
+
+/*body {
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+}
+
+.product-form {
+width: 400px;
+padding: 20px;
+border: 1px solid #ccc;
+border-radius: 10px;
+background-color: #fff;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.product-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.product-form label {
+    font-weight: bold;
+}
+
+.product-form input,
+.product-form select,
+.product-form textarea {
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.product-form select {
+    height: 40px;
+}
+*/
+.card-img {
+    width:50px;
+    height: 50px;
 }

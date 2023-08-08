@@ -1,0 +1,31 @@
+﻿@page
+@model RazorStore.Pages.Detail.GoodsPageModel
+@{
+    var picturePath = $"/images/{Model.Goods.PicturePath ?? "nonPictures"}";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Страница товара</title>
+    <link rel="stylesheet" href="~/css/site.css">
+</head>
+<body>
+    <div class="product-details">
+        <h2>@Model.Goods.Name</h2>
+        <img src="@picturePath" alt="Изображение товара">
+
+        <h3>Описание</h3>
+        <p>@Model.Goods.Subscribe</p>
+
+        <h3>Адрес</h3>
+        <p>@Model.Goods.Location</p>
+
+        <h3>Цена</h3>
+        <p>@Model.Goods.Price</p>
+    </div>
+
+    <!-- Здесь может быть дополнительный контент или элементы интерфейса -->
+
+</body>
+</html>
