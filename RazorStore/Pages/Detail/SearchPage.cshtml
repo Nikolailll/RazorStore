@@ -1,14 +1,8 @@
 ﻿@page
-@model IndexModel
+@model RazorStore.Pages.Detail.SearchPageModel
 @{
-    ViewData["Title"] = "Home page";
-    //var picturePath = $"/image/{Model.}"
 }
 
-@*<div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    </div>*@
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,21 +14,20 @@
     <button id="searchButton">Найти</button>
 </div>
 @foreach (var goods in Model.Goods)
- {
+{
     <body>
         <div class="product-card">
-            <img class="card-img" src="/images/@goods.PicturePath" asp-append-version="true">
+            <img src="/images/@goods.PicturePath" alt="Превью товара">
             <h2>@goods.Name</h2>
             <p>@goods.Price</p>
-            <p>@goods.Subscribe </p>
+            <p>@goods.Subscribe</p>
             <p>@goods.Location</p>
             <a asp-page="Detail/GoodsPage" asp-route-id="@goods.Id" target="_blank">Подробнее</a>
         </div>
 
     </body>
- }
+}
 
 <!-- Добавьте другие карточки с товарами, если нужно -->
 
 </html>
-
