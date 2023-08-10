@@ -115,3 +115,20 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-width: 100%;
     height: auto;
 }
+
+.flex-container {
+    display: flex;
+    align-items: center;
+}
+
+.padding-x {
+    padding: 0 1rem;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.w-full {
+    width: 100%;
+}
