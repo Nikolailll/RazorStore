@@ -39,6 +39,7 @@
     <None Remove="Areas\Identity\" />
     <None Remove="Areas\Identity\Pages\" />
     <None Remove="Areas\Identity\Pages\Account\" />
+    <None Remove="Areas\Identity\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
@@ -47,6 +48,7 @@
     <Folder Include="Areas\Identity\" />
     <Folder Include="Areas\Identity\Pages\" />
     <Folder Include="Areas\Identity\Pages\Account\" />
+    <Folder Include="Areas\Identity\Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\images\" />
