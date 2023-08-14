@@ -25,7 +25,15 @@
         <p>@Model.Goods.Price</p>
     </div>
 
-    <!-- Здесь может быть дополнительный контент или элементы интерфейса -->
+    <!-- Форма для удаления товара -->
+    <form method="post" action="/Detail/DeleteGoods/@Model.Goods.Id">
+        <input type="submit" value="Удалить" />
+    </form>
 
+    <!-- Форма для обновления товара -->
+    <form method="post" action="/Detail/UpdateGoods/@Model.Goods.Id">
+        <input type="submit" value="Обновить" />
+    </form>
 </body>
+
 </html>

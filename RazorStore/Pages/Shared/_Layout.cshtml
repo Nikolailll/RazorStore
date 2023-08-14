@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using RazorStore.Model
+@inject SignInManager<User> siginManager
+@inject UserManager<User> userManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -31,6 +34,13 @@
 
 
                     </div>
+                    @if (siginManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Detail/AddGoods">Добавить товар</a>
+                        </li>
+
+                    }
                     <form method="get" asp-page="Detail/searchpage">
                         <div class="input-group">
                             <input class="form-control" type="text" name="search" />

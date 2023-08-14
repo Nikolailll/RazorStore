@@ -17,11 +17,17 @@ namespace RazorStore.Pages.Detail
         {
             this.db = db;
         }
+        [BindProperty]
         public Goods Goods { get; set; }
 
         public void OnGet(int id)
         {
              Goods = db.Goods.Find(id);
+        }
+
+        public void OnPost(Goods good)
+        {
+            
         }
 
     }
