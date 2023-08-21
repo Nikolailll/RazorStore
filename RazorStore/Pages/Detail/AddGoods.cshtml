@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id:min(1)?}/{handler?}"
 @model RazorStore.Pages.Detail.AddGoodsModel
 @{
     var imagePath = $"/images/{Model.Goods.PicturePath ?? "nonPictures"}";

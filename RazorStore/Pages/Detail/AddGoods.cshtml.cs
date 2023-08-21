@@ -27,7 +27,7 @@ namespace RazorStore.Pages.Detail
         {
             Goods = new Goods();
         }
-        public void OnPost()
+        public void OnPost( )
         {
             if (ModelState.IsValid)
             {
@@ -41,8 +41,17 @@ namespace RazorStore.Pages.Detail
                     Goods.PicturePath = UploadPhoto();
 
                 }
-                db.Goods.Add(Goods);
-                db.SaveChanges();
+                if(Goods.Id > 0)
+                {
+                    var good = db.Goods.Find(Goods.Id);
+                    db.Goods.Remove(good);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    db.Goods.Add(Goods);
+                    db.SaveChanges();
+                }
             }
 
 

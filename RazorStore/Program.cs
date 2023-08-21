@@ -2,13 +2,13 @@ using Microsoft.EntityFrameworkCore;
 using RazorStore.Model;
 using RazorStore.Services;
 using Microsoft.AspNetCore.Identity;
-
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
-
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));

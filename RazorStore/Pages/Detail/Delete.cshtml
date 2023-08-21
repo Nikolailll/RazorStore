@@ -1,0 +1,29 @@
+﻿@page
+@model RazorStore.Pages.Detail.DeleteModel
+@{
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Удаление товара</title>
+</head>
+<body>
+    <h1>Страница удаления товара</h1>
+
+    <h2>@Model.Goods.Name</h2>
+    <p>Цена: @Model.Goods.Price</p>
+    <p>Описание: @Model.Goods.Subscribe</p>
+    <p>Тип: @Model.Goods.Type</p>
+    <p>Местоположение: @Model.Goods.Location</p>
+
+    <!-- Форма для удаления товара -->
+    <form method="post">
+        <!-- Здесь вы можете добавить скрытое поле с ID товара -->
+        <input type="hidden" name="product_id" asp-for="Goods.Id">
+
+        <!-- Кнопка для отправки формы -->
+        <button type="submit">Удалить товар</button>
+    </form>
+</body>
+</html>
