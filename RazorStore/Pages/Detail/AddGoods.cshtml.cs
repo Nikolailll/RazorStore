@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorStore.Model;
@@ -13,11 +15,16 @@ namespace RazorStore.Pages.Detail
     {
         private readonly AppDbContext db;
         private readonly IWebHostEnvironment host;
+        private readonly UserManager<User> _user;
+        private readonly IAuthorizationService authorizationService;
 
-        public AddGoodsModel(AppDbContext db, IWebHostEnvironment host)
+        public AddGoodsModel(AppDbContext db, IWebHostEnvironment host,
+            UserManager<User> user, IAuthorizationService authorizationService)
         {
             this.db = db;
             this.host = host;
+            this._user = user;
+            this.authorizationService = authorizationService;
         }
         [BindProperty]
         public Goods Goods { get; set; }
@@ -27,7 +34,7 @@ namespace RazorStore.Pages.Detail
         {
             Goods = new Goods();
         }
-        public void OnPost( )
+        public async void OnPost( )
         {
             if (ModelState.IsValid)
             {
@@ -49,6 +56,17 @@ namespace RazorStore.Pages.Detail
                 }
                 else
                 {
+                   
+                    var users = await _user.GetUserAsync(User);
+                    if(users != null)
+                    {
+                        Goods.User = users;
+                    }
+                    else
+                    {
+                        RedirectToPage("/Account/Login");
+                    }
+                    
                     db.Goods.Add(Goods);
                     db.SaveChanges();
                 }

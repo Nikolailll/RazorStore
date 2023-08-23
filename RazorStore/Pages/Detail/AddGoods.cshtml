@@ -1,6 +1,9 @@
 ﻿@page "{id:min(1)?}/{handler?}"
 @model RazorStore.Pages.Detail.AddGoodsModel
+@using RazorStore.Model
+@*@inject UserManager<User> users*@
 @{
+    
     var imagePath = $"/images/{Model.Goods.PicturePath ?? "nonPictures"}";
     ViewData["Title"] = "Add";
 }
@@ -8,7 +11,9 @@
 
 
 <form method="post" enctype="multipart/form-data">
+    @*<input type="hidden" asp-for="" />*@
     <div class="form-group">
+
         <label asp-for="Goods.Name"></label>
         <input asp-for="Goods.Name" class="form-control" required />
     </div>

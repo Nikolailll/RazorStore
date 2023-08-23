@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorStore.Model;
@@ -9,20 +10,25 @@ using RazorStore.Services;
 
 namespace RazorStore.Pages.Detail
 {
-	public class DeleteModel : PageModel
+    [Authorize]
+    public class DeleteModel : PageModel
     {
+        private readonly IAuthorizationService authorizationService;
+
         public Goods Goods { get; set; }
         private AppDbContext Db { get; }
 
-        public DeleteModel(AppDbContext db)
+        public DeleteModel(AppDbContext db, IAuthorizationService authorizationService)
         {
             Db = db;
+            this.authorizationService = authorizationService;
         }
-        public IActionResult OnGet(int? id)
+        public async Task<IActionResult> OnGet(int? id)
         {
-            
+
             Goods = Db.Goods.Find(id);
-            if(Goods == null)
+
+            if (Goods == null)
             {
                 return RedirectToPage("/Error");
             }
@@ -32,19 +38,21 @@ namespace RazorStore.Pages.Detail
             }
 
         }
-        public IActionResult OnPost(int? id)
+        public async Task<IActionResult> OnPost(int? id)
         {
             Goods = Db.Goods.Find(id);
+            var autharization = await authorizationService.AuthorizeAsync(User, Goods, "CanManageGoods");
             if (Goods == null)
             {
                 return RedirectToPage("/index");
             }
-            else
+            if (!autharization.Succeeded)
             {
                 Db.Goods.Remove(Goods);
                 Db.SaveChanges();
-                return RedirectToPage("/index");
+
             }
+            return RedirectToPage("/index");
 
         }
     }

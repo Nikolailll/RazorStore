@@ -19,10 +19,15 @@ public class IndexModel : PageModel
     }
 
     public IEnumerable<Goods> Goods { get; set; }
+    public PagePagination<Goods> PagePagination { get; set; }
 
-    public void OnGet()
+    public void OnGet(int pageNumber = 1)
     {
-        Goods = db.Goods;
+        var pageSize = 1;
+        var countGoods = db.Goods.Count();
+        var paginatio = new Pagination(pageSize, pageNumber, countGoods);
+        var item = db.Goods.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+        PagePagination = new PagePagination<Goods>(item, paginatio);
     }
 
     public void OnPost()

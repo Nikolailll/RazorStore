@@ -2,7 +2,7 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-    //var picturePath = $"/image/{Model.}"
+    var pageNumber = Model.PagePagination.Pagination.PageNumber;
 }
 
 @*<div class="text-center">
@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="~/css/site.css">
 </head>
 
-@foreach (var goods in Model.Goods)
- {
+@foreach (var goods in Model.PagePagination.Goods)
+{
     <body>
         <div class="product-card">
             <img class="card-img" src="/images/@goods.PicturePath" asp-append-version="true">
@@ -29,9 +29,25 @@
         </div>
 
     </body>
- }
-
-<!-- Добавьте другие карточки с товарами, если нужно -->
+}
+@if (Model.PagePagination.Pagination.PreviosPage)
+{
+    <a asp-action="OnGet"
+       asp-route-pageNumber="@(pageNumber- 1)"
+       class="btn btn-outline-dark">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>
+}
+@if (Model.PagePagination.Pagination.NextPage)
+{
+    <a asp-action="OnGet"
+       asp-route-pageNumber="@(pageNumber + 1)"
+       class="btn btn-outline-dark">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}
 
 </html>
 
