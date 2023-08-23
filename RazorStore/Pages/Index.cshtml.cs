@@ -25,9 +25,9 @@ public class IndexModel : PageModel
     {
         var pageSize = 1;
         var countGoods = db.Goods.Count();
-        var paginatio = new Pagination(pageSize, pageNumber, countGoods);
+        var pagination = new Pagination(pageSize, pageNumber, countGoods);
         var item = db.Goods.Skip((pageNumber - 1) * pageSize).Take(pageSize);
-        PagePagination = new PagePagination<Goods>(item, paginatio);
+        PagePagination = new PagePagination<Goods>(item, pagination);
     }
 
     public void OnPost()

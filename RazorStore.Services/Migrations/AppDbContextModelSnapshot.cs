@@ -180,7 +180,12 @@ namespace RazorStore.Services.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Goods");
                 });
@@ -298,6 +303,20 @@ namespace RazorStore.Services.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("RazorStore.Model.Goods", b =>
+                {
+                    b.HasOne("RazorStore.Model.User", "User")
+                        .WithMany("Goods")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("RazorStore.Model.User", b =>
+                {
+                    b.Navigation("Goods");
                 });
 #pragma warning restore 612, 618
         }

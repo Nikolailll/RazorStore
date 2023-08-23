@@ -11,8 +11,8 @@ using RazorStore.Services;
 namespace RazorStore.Services.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230817145505_ssssss")]
-    partial class ssssss
+    [Migration("20230821173404_First")]
+    partial class First
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -310,9 +310,11 @@ namespace RazorStore.Services.Migrations
 
             modelBuilder.Entity("RazorStore.Model.Goods", b =>
                 {
-                    b.HasOne("RazorStore.Model.User", null)
+                    b.HasOne("RazorStore.Model.User", "User")
                         .WithMany("Goods")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("RazorStore.Model.User", b =>

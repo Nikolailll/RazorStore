@@ -6,6 +6,7 @@ namespace RazorStore.Model
 	public class Goods
 	{
 		public int Id { get; set; }
+		
 		public string Name { get; set; }
 		public string? PicturePath { get; set; }
 		public string Price { get; set; }
@@ -13,7 +14,7 @@ namespace RazorStore.Model
 		public TypeOfGoods Type { get; set; }
 		public string Location { get; set; }
 		public bool Delete { get; set; } = false;
-
+		public User? User { get; set; }
 
 	}
 }
