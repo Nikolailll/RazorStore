@@ -14,14 +14,16 @@ namespace RazorStore.Pages.Detail
     public class DeleteModel : PageModel
     {
         private readonly IAuthorizationService authorizationService;
+        private readonly ILogger<DeleteModel> logger;
 
         public Goods Goods { get; set; }
         private AppDbContext Db { get; }
 
-        public DeleteModel(AppDbContext db, IAuthorizationService authorizationService)
+        public DeleteModel(AppDbContext db, IAuthorizationService authorizationService, ILogger<DeleteModel> logger)
         {
             Db = db;
             this.authorizationService = authorizationService;
+            this.logger = logger;
         }
         public async Task<IActionResult> OnGet(int? id)
         {
@@ -30,6 +32,7 @@ namespace RazorStore.Pages.Detail
 
             if (Goods == null)
             {
+                logger.LogWarning("Goods Id : {id} dosen't exist", id);
                 return RedirectToPage("/Error");
             }
             else
@@ -44,6 +47,7 @@ namespace RazorStore.Pages.Detail
             var autharization = await authorizationService.AuthorizeAsync(User, Goods, "CanManageGoods");
             if (Goods == null)
             {
+
                 return RedirectToPage("/index");
             }
             if (!autharization.Succeeded)

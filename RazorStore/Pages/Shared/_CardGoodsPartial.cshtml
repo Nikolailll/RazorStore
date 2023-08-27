@@ -1,0 +1,23 @@
+﻿@model Goods
+@{
+    var showButton = (bool)ViewData["ShowButon"];
+    var imagePath = $"image/{Model.PicturePath ?? "nonPictures"}";
+}
+
+<div class="product-card">
+    <img class="card-img" src="@imagePath" asp-append-version="true">
+    <h2>@Model.Name</h2>
+    <p>@Model.Price</p>
+    <p>@Model.Subscribe </p>
+    <p>@Model.Location</p>
+    <a asp-page="Detail/GoodsPage" asp-route-id="@Model.Id" target="_blank">Подробнее</a>
+    @if (showButton)
+    {
+        <div class="card-footer text-center">
+            <a asp-page="Detail/GoodsPage" asp-route-ID="@Model.Id" class="btn btn-success m1 buttonShadow">View</a>
+            <a asp-page="Detail/AddGoods" asp-route-ID="@Model.Id" class="btn btn-primary m1 buttonShadow">Edit</a>
+            <a asp-page="Detail/Delete" asp-route-ID="@Model.Id" class="btn btn-danger m1 buttonShadow">Delete</a>
+        </div>
+
+    }
+</div>

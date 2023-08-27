@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Home page";
     var pageNumber = Model.PagePagination.Pagination.PageNumber;
+    ViewData["ShowButon"] = true;
 }
 
 @*<div class="text-center">
@@ -18,17 +19,9 @@
 
 @foreach (var goods in Model.PagePagination.Goods)
 {
-    <body>
-        <div class="product-card">
-            <img class="card-img" src="/images/@goods.PicturePath" asp-append-version="true">
-            <h2>@goods.Name</h2>
-            <p>@goods.Price</p>
-            <p>@goods.Subscribe </p>
-            <p>@goods.Location</p>
-            <a asp-page="Detail/GoodsPage" asp-route-id="@goods.Id" target="_blank">Подробнее</a>
-        </div>
-
-    </body>
+    <div class="col-12 col-sm-6 col-lg-4">
+        <partial name="_CardGoodsPartial" model="goods" view-data="ViewData" />
+    </div>
 }
 @if (Model.PagePagination.Pagination.PreviosPage)
 {

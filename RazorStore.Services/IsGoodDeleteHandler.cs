@@ -21,7 +21,7 @@ namespace RazorStore.Services
         {
             var appUser = await _user.GetUserAsync(context.User);
             logger.LogInformation("User {appUser} try access", appUser.Id);
-            if (appUser == null)
+            if (appUser == null || resource.User == null)
             {
                 
                 return;

@@ -3,7 +3,7 @@
 @using RazorStore.Model
 @*@inject UserManager<User> users*@
 @{
-    
+
     var imagePath = $"/images/{Model.Goods.PicturePath ?? "nonPictures"}";
     ViewData["Title"] = "Add";
 }
@@ -11,7 +11,7 @@
 
 
 <form method="post" enctype="multipart/form-data">
-    @*<input type="hidden" asp-for="" />*@
+    <input type="hidden" asp-for="Goods.Id" />
     <div class="form-group">
 
         <label asp-for="Goods.Name"></label>
@@ -42,9 +42,9 @@
         <input asp-for="Goods.Location" class="form-control" required />
     </div>
     @*<div class="form-group">
-        <label>Загрузить картинку:</label>
-        <input type="file" name="ImageFile" class="form-control-file" accept="image/*" required />
-    </div>*@
+            <label>Загрузить картинку:</label>
+            <input type="file" name="ImageFile" class="form-control-file" accept="image/*" required />
+        </div>*@
     <div class="form-group">
         <label>Превью:</label>
         <img class="card-img top border border-primary" src="@imagePath" asp-append-version="true" />
@@ -53,5 +53,14 @@
             <label class="custom-file-label text-left">Выберите файл</label>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Добавить товар</button>
+   
+    @if (Model.ShowButon)
+    {
+        <button type="submit" class="btn btn-primary">Обновить</button>
+    }
+    else
+    {
+        <button type="submit" class="btn btn-primary">Добавить товар</button>
+    }
+
 </form>

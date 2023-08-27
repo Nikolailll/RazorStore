@@ -4,25 +4,28 @@ using RazorStore.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Authorization;
-
-
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 builder.Services.AddAuthentication().AddGoogle(googleOption =>
 {
     googleOption.ClientId = builder.Configuration["Google:ClientId"];
     googleOption.ClientSecret = builder.Configuration["Google:ClientSecret"];
 });
+
 builder.Services.AddAuthorization(option =>
 {
     option.AddPolicy("CanManageGoods", policyBuilder =>
     policyBuilder.AddRequirements(new IsGoodsDeleteRequirement()));
 });
+
 builder.Services.AddScoped<IAuthorizationHandler, IsGoodDeleteHandler>();
 // Add services to the container.
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
+
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {

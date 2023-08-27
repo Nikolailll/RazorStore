@@ -12,8 +12,11 @@ namespace RazorStore.Services
         }
 		public IEnumerable<T> Goods { get; set; }
 		public Pagination Pagination { get; set; }
-	}
 
+		
+		
+	}
+	
 	public class Pagination
 	{
 		public int PageNumber { get; private set; }

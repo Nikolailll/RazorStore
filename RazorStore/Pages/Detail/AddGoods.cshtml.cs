@@ -17,24 +17,35 @@ namespace RazorStore.Pages.Detail
         private readonly IWebHostEnvironment host;
         private readonly UserManager<User> _user;
         private readonly IAuthorizationService authorizationService;
+        private readonly ILogger<AddGoodsModel> logger;
 
         public AddGoodsModel(AppDbContext db, IWebHostEnvironment host,
-            UserManager<User> user, IAuthorizationService authorizationService)
+            UserManager<User> user, IAuthorizationService authorizationService, ILogger<AddGoodsModel> logger)
         {
             this.db = db;
             this.host = host;
             this._user = user;
             this.authorizationService = authorizationService;
+            this.logger = logger;
         }
+        public bool ShowButon { get; set; } = false;
         [BindProperty]
         public Goods Goods { get; set; }
         [BindProperty]
         public IFormFile? Photo { get; set; }
-        public void OnGet()
+        public void OnGet(int? id)
         {
-            Goods = new Goods();
+            if (id > 0)
+            {
+                Goods = db.Goods.Find(id);
+                ShowButon = id > 0;
+            }
+            else
+            {
+                Goods = new Goods();
+            }
         }
-        public async void OnPost( )
+        public async void OnPost()
         {
             if (ModelState.IsValid)
             {
@@ -50,8 +61,9 @@ namespace RazorStore.Pages.Detail
                 }
                 if(Goods.Id > 0)
                 {
-                    var good = db.Goods.Find(Goods.Id);
-                    db.Goods.Remove(good);
+                    logger.LogInformation("Try to update user with id : {id}", Goods.Id);
+                    var good = db.Goods.Attach(Goods);
+                    good.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     db.SaveChanges();
                 }
                 else

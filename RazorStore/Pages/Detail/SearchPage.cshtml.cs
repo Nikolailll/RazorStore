@@ -22,9 +22,10 @@ namespace RazorStore.Pages.Detail
         public IEnumerable<Goods> Goods { get; set; }
         public void OnGet(string search)
         {
+            
             logger.LogInformation("Search param {search}", search);
             Goods = appDbContext.Goods.Where(x => x.Name == search);
-
+            
 
         }
     }
