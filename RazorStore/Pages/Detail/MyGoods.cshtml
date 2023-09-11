@@ -1,0 +1,32 @@
+﻿@page
+@model RazorStore.Pages.Detail.MyGoodsModel
+@{
+    ViewData["ShowButon"] = Model.ShowButton;
+}
+
+<html>
+<head>
+
+</head>
+<body>
+    <h1> Ваши товары</h1>
+
+    <div>
+        @if (Model.goods.Count() == 0)
+        {
+            <p>Товары не найдены</p>
+        }
+        else
+        {
+            foreach (var item in Model.goods)
+            {
+                <div>
+                    <partial name="_CardGoodsPartial" model="item" view-data="ViewData" />
+                </div>
+            }
+        }
+
+    </div>
+
+</body>
+</html>

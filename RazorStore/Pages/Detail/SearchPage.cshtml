@@ -5,26 +5,25 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Магазин товаров</title>
-    <link rel="stylesheet" href="~/css/site.css">
-</head>
+    <head>
+        <title>Магазин товаров</title>
+        <link rel="stylesheet" href="~/css/site.css">
+    </head>
+        <div class="row">
 
-@foreach (var goods in Model.Goods)
-{
-    <body>
-        <div class="product-card">
-            <img src="/images/@goods.PicturePath" alt="Превью товара">
-            <h2>@goods.Name</h2>
-            <p>@goods.Price</p>
-            <p>@goods.Subscribe</p>
-            <p>@goods.Location</p>
-            <a asp-page="Detail/GoodsPage" asp-route-id="@goods.Id" target="_blank">Подробнее</a>
+            @foreach (var goods in Model.Goods)
+            {
+                <body>
+                    <div class="product-card">
+                        <img src="/images/@goods.PicturePath" alt="Превью товара">
+                        <h2>@goods.Name</h2>
+                        <p>@goods.Price</p>
+                        <p>@goods.Subscribe</p>
+                        <p>@goods.Location</p>
+                        <a asp-page="Detail/GoodsPage" asp-route-id="@goods.Id" target="_blank">Подробнее</a>
+                    </div>
+
+                </body>
+            }
         </div>
-
-    </body>
-}
-
-<!-- Добавьте другие карточки с товарами, если нужно -->
-
 </html>

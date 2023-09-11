@@ -25,7 +25,7 @@ builder.Services.AddScoped<IAuthorizationHandler, IsGoodDeleteHandler>();
 // Add services to the container.
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
-
+builder.Services.AddScoped<ISearchAlgorithm<Goods>, SearchAlgorithm>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {

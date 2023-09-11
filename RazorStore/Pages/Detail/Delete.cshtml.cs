@@ -47,7 +47,7 @@ namespace RazorStore.Pages.Detail
             var autharization = await authorizationService.AuthorizeAsync(User, Goods, "CanManageGoods");
             if (Goods == null)
             {
-
+                
                 return RedirectToPage("/index");
             }
             if (!autharization.Succeeded)

@@ -10,26 +10,25 @@ public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
     private readonly AppDbContext db;
+    private readonly ISearchAlgorithm<Goods> goods;
 
-
-    public IndexModel(ILogger<IndexModel> logger, AppDbContext db)
+    public IndexModel(ILogger<IndexModel> logger, AppDbContext db, ISearchAlgorithm<Goods> goods)
     {
         _logger = logger;
         this.db = db;
+        this.goods = goods;
     }
-
+    public bool ShowButton { get; set; } = false;
+    [BindProperty(SupportsGet = true)]
+    public int QuantityGoods { get; set; } = 1;
     public IEnumerable<Goods> Goods { get; set; }
     public PagePagination<Goods> PagePagination { get; set; }
 
-    public void OnGet(int pageNumber = 1)
+    public void OnGet(int quantity, int pageNumber = 1)
     {
-        var pageSize = 1;
-        var countGoods = db.Goods.Count();
-        var pagination = new Pagination(pageSize, pageNumber, countGoods);
-        var item = db.Goods.Skip((pageNumber - 1) * pageSize).Take(pageSize);
-        PagePagination = new PagePagination<Goods>(item, pagination);
+        
+        PagePagination = new PagePagination<Goods>(db.Goods, quantity, pageNumber);
     }
-
     public void OnPost()
     {
 

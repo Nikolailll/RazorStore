@@ -76,6 +76,7 @@ namespace RazorStore.Pages.Detail
                     }
                     else
                     {
+                        logger.LogWarning("User : {name} not found", User.Identity.Name);
                         RedirectToPage("/Account/Login");
                     }
                     

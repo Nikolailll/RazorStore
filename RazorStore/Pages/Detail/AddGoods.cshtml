@@ -13,7 +13,6 @@
 <form method="post" enctype="multipart/form-data">
     <input type="hidden" asp-for="Goods.Id" />
     <div class="form-group">
-
         <label asp-for="Goods.Name"></label>
         <input asp-for="Goods.Name" class="form-control" required />
     </div>
@@ -53,7 +52,7 @@
             <label class="custom-file-label text-left">Выберите файл</label>
         </div>
     </div>
-   
+
     @if (Model.ShowButon)
     {
         <button type="submit" class="btn btn-primary">Обновить</button>

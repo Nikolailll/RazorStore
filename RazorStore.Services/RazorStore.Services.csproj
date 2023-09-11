@@ -24,4 +24,10 @@
   <ItemGroup>
     <ProjectReference Include="..\RazorStoe.Model\RazorStore.Model.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="CustomTagHelpers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CustomTagHelpers\" />
+  </ItemGroup>
 </Project>

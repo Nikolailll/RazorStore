@@ -1,46 +1,66 @@
-﻿@page
+﻿@page "/{quantity=1}/{pageNumber=1}"
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-    var pageNumber = Model.PagePagination.Pagination.PageNumber;
-    ViewData["ShowButon"] = true;
+    var pageNumber = Model.PagePagination.PageNumber;
+    ViewData["ShowButon"] = Model.ShowButton;
+    var size = Model.PagePagination.PageSize;
 }
 
-@*<div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    </div>*@
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Магазин товаров</title>
     <link rel="stylesheet" href="~/css/site.css">
 </head>
+<div class="row">
 
-@foreach (var goods in Model.PagePagination.Goods)
-{
-    <div class="col-12 col-sm-6 col-lg-4">
-        <partial name="_CardGoodsPartial" model="goods" view-data="ViewData" />
-    </div>
-}
-@if (Model.PagePagination.Pagination.PreviosPage)
+    @foreach (var goods in Model.PagePagination.Goods)
+    {
+        <div class="col-2">
+            <partial name="_CardGoodsPartial" model="goods" view-data="ViewData" />
+        </div>
+    }
+</div>
+@if (Model.PagePagination.PreviosPage)
 {
     <a asp-action="OnGet"
        asp-route-pageNumber="@(pageNumber- 1)"
+       asp-route-quantity="@size"
        class="btn btn-outline-dark">
         <i class="glyphicon glyphicon-chevron-left"></i>
         Назад
     </a>
 }
-@if (Model.PagePagination.Pagination.NextPage)
+@if (Model.PagePagination.NextPage)
 {
     <a asp-action="OnGet"
        asp-route-pageNumber="@(pageNumber + 1)"
+       asp-route-quantity="@size"
        class="btn btn-outline-dark">
         Вперед
         <i class="glyphicon glyphicon-chevron-right"></i>
     </a>
 }
+<a asp-action="OnGet"
+   asp-route-quantity="2"
+   asp-route-pageNumber="@(pageNumber)"
+   class="btn btn-outline-dark">
+    2
+    <i class="glyphicon glyphicon-chevron-right"></i>
+</a>
+<a asp-action="OnGet"
+   asp-route-quantity="1"
+   asp-route-pageNumber="@(pageNumber)"
+   class="btn btn-outline-dark">
+    1
+    <i class="glyphicon glyphicon-chevron-right"></i>
+</a>
+
+<script>function submitForm() {
+        document.getElementById('quantityForm').submit();
+    }</script>
 
 </html>
 

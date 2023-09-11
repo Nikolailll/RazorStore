@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorStore.Model", "RazorSt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorStore.Services", "RazorStore.Services\RazorStore.Services.csproj", "{3E5BE8ED-BE94-426C-847B-25C8802CC95D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorStore.Test", "RazorStore.Test\RazorStore.Test.csproj", "{78C2D8AF-8B9C-4FDC-9627-E2C0571EEB61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3E5BE8ED-BE94-426C-847B-25C8802CC95D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E5BE8ED-BE94-426C-847B-25C8802CC95D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E5BE8ED-BE94-426C-847B-25C8802CC95D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78C2D8AF-8B9C-4FDC-9627-E2C0571EEB61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78C2D8AF-8B9C-4FDC-9627-E2C0571EEB61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78C2D8AF-8B9C-4FDC-9627-E2C0571EEB61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78C2D8AF-8B9C-4FDC-9627-E2C0571EEB61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

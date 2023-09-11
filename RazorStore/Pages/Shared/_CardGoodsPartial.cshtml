@@ -4,7 +4,7 @@
     var imagePath = $"image/{Model.PicturePath ?? "nonPictures"}";
 }
 
-<div class="product-card">
+<div class="product-card w-100" >
     <img class="card-img" src="@imagePath" asp-append-version="true">
     <h2>@Model.Name</h2>
     <p>@Model.Price</p>
@@ -14,9 +14,9 @@
     @if (showButton)
     {
         <div class="card-footer text-center">
-            <a asp-page="Detail/GoodsPage" asp-route-ID="@Model.Id" class="btn btn-success m1 buttonShadow">View</a>
-            <a asp-page="Detail/AddGoods" asp-route-ID="@Model.Id" class="btn btn-primary m1 buttonShadow">Edit</a>
-            <a asp-page="Detail/Delete" asp-route-ID="@Model.Id" class="btn btn-danger m1 buttonShadow">Delete</a>
+            <a asp-page="Detail/GoodsPage" asp-route-id="@Model.Id" class="btn btn-success m1 buttonShadow">View</a>
+            <a asp-page="Detail/AddGoods" asp-route-id="@Model.Id" class="btn btn-primary m1 buttonShadow">Edit</a>
+            <a asp-page="Detail/Delete" asp-route-id="@Model.Id" class="btn btn-danger m1 buttonShadow">Delete</a>
         </div>
 
     }

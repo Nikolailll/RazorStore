@@ -13,18 +13,25 @@ namespace RazorStore.Pages.Detail
     {
         private readonly AppDbContext appDbContext;
         private readonly ILogger<SearchPageModel> logger;
+        private readonly ISearchAlgorithm<Goods> searchAlgorithm;
 
-        public SearchPageModel(AppDbContext appDbContext, ILogger<SearchPageModel> logger)
+        public SearchPageModel(AppDbContext appDbContext, ILogger<SearchPageModel> logger, ISearchAlgorithm<Goods> searchAlgorithm)
         {
             this.appDbContext = appDbContext;
             this.logger = logger;
+            this.searchAlgorithm = searchAlgorithm;
         }
         public IEnumerable<Goods> Goods { get; set; }
-        public void OnGet(string search)
+        public IActionResult OnGet(string search)
         {
-            
+            if(search == null)
+            {
+                Goods = appDbContext.Goods;
+                return Page();
+            }
             logger.LogInformation("Search param {search}", search);
-            Goods = appDbContext.Goods.Where(x => x.Name == search);
+            Goods = searchAlgorithm.Search(search);
+            return Page();
             
 
         }

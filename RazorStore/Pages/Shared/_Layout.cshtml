@@ -1,6 +1,9 @@
 ﻿@using RazorStore.Model
 @inject SignInManager<User> siginManager
 @inject UserManager<User> userManager
+@{
+    var showContent = siginManager.IsSignedIn(User);
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,10 +27,10 @@
                     </button>
                     <div class="flex-container">
                         <ul class="navbar-nav">
-                            <li class="nav-item">
+                            <li class="nav-item" >
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" >
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                             </li>
                         </ul>
@@ -41,6 +44,11 @@
                         </li>
 
                     }
+                    <li class="nav-item" if="showContent" >
+                        <a class="nav-link text-dark" asp-area="" asp-route-id="@userManager.GetUserId(User)" asp-page="/Detail/MyGoods">Мои товары </a>
+                    </li>
+
+
                     <form method="get" asp-page="Detail/searchpage">
                         <div class="input-group">
                             <input class="form-control" type="text" name="search" />
