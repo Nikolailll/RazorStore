@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 using RazorStore.Model;
 using RazorStore.Services;
 using System.Linq;
@@ -11,28 +12,40 @@ public class IndexModel : PageModel
     private readonly ILogger<IndexModel> _logger;
     private readonly AppDbContext db;
     private readonly ISearchAlgorithm<Goods> goods;
+    private readonly IExchangeInt exchangeInt;
 
-    public IndexModel(ILogger<IndexModel> logger, AppDbContext db, ISearchAlgorithm<Goods> goods)
+    public IndexModel(ILogger<IndexModel> logger, AppDbContext db, ISearchAlgorithm<Goods> goods, IExchangeInt exchangeInt)
     {
         _logger = logger;
         this.db = db;
         this.goods = goods;
+        this.exchangeInt = exchangeInt;
     }
-    public bool ShowButton { get; set; } = false;
-    [BindProperty(SupportsGet = true)]
-    public int QuantityGoods { get; set; } = 1;
+    
+
+    public string Exchange { get; set; }
+
     public IEnumerable<Goods> Goods { get; set; }
     public PagePagination<Goods> PagePagination { get; set; }
 
-    public void OnGet(int quantity, int pageNumber = 1)
+    public async Task<IActionResult> OnGet(int quantity = 1, int pageNumber = 1)
     {
-        
+        //var response = await exchangeInt.GetLatest("BTC", "USD");
+        //if(!(response == "Failed"))
+        //{
+        //    var ss = JsonConvert.DeserializeObject<Exchange>(response);
+        //    Exchange = ss.Rate;
+        //}
         PagePagination = new PagePagination<Goods>(db.Goods, quantity, pageNumber);
+        return Page();
     }
-    public void OnPost()
+    public void OnPost(int quantity, int pageNumber)
     {
 
+       PagePagination = new PagePagination<Goods>(db.Goods, quantity, pageNumber);
+
+
     }
-    
+
 }
 

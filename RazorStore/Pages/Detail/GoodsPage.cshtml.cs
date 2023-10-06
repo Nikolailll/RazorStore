@@ -32,6 +32,7 @@ namespace RazorStore.Pages.Detail
 
         public async Task<IActionResult> OnGet(int id)
         {
+
             Goods = db.Goods.Find(id);
             if (signInManager.IsSignedIn(User))
             {

@@ -132,3 +132,62 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 .w-full {
     width: 100%;
 }
+.mirgin{
+    text-align:left
+}
+.card{
+    width:200px;
+    min-height:300px;
+    box-shadow:1px 2px 4px rgba(0,0,0,01);
+    display:flex;
+    flex-direction:column;
+    border-radius:4px;
+    transition:0.2s;
+    position:relative;
+}.card:hover{
+     box-shadow:4px 8px 16px rgba(255,102,51,0.2);
+ }
+.card__top{
+    flex:0 0 220px;
+    position:relative;
+    overflow:hidden;
+}
+.card__image{
+    display:block;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+.card__image > img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    transition:0.2s;
+}
+.card__image:hover > img{
+    transform:scale(1.1);
+}
+.car__bottom{
+    display:flex;
+    flex-direction:column;
+    flex:1 0 auto;
+    padding:10px;
+}
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, 225px);
+    width:100%;
+    max-width:1000px;
+    justify-content:center;
+    justify-items:center;
+    column-gap:30px;
+    row-gap:40px;
+    margin:0 auto;
+
+}
+.buttom-pagin{
+    padding-top:20px;
+    
+}

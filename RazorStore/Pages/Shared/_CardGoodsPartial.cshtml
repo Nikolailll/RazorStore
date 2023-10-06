@@ -1,23 +1,30 @@
 ﻿@model Goods
+@using Microsoft.AspNetCore.Mvc.TagHelpers 
+@addTagHelper *, RazorStore.Services
 @{
-    var showButton = (bool)ViewData["ShowButon"];
-    var imagePath = $"image/{Model.PicturePath ?? "nonPictures"}";
+    
+    var imagePath = $"/images/{Model.PicturePath ?? "nonPictures"}";
+     
 }
 
-<div class="product-card w-100" >
-    <img class="card-img" src="@imagePath" asp-append-version="true">
-    <h2>@Model.Name</h2>
-    <p>@Model.Price</p>
-    <p>@Model.Subscribe </p>
-    <p>@Model.Location</p>
-    <a asp-page="Detail/GoodsPage" asp-route-id="@Model.Id" target="_blank">Подробнее</a>
-    @if (showButton)
-    {
-        <div class="card-footer text-center">
-            <a asp-page="Detail/GoodsPage" asp-route-id="@Model.Id" class="btn btn-success m1 buttonShadow">View</a>
-            <a asp-page="Detail/AddGoods" asp-route-id="@Model.Id" class="btn btn-primary m1 buttonShadow">Edit</a>
-            <a asp-page="Detail/Delete" asp-route-id="@Model.Id" class="btn btn-danger m1 buttonShadow">Delete</a>
-        </div>
 
-    }
+<div class="card">
+    <div class="card__top">
+        <a asp-page="Detail/GoodsPage" asp-route-id="@Model.Id" class="card__image">
+            <img
+                 src="@imagePath" asp-append-version="true"
+                 alt="@Model.Name"
+             />
+        </a>
+    </div>
+    <div class="card__botom" >
+        <div>@Model.Name </div>
+        <div>@Model.Price</div>
+        <div>@Model.Subscribe</div>
+        <div>@Model.Location</div>
+    </div>
+    <div ></div>
+   
+    
+    
 </div>

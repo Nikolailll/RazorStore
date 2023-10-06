@@ -41,16 +41,18 @@ namespace RazorStore.Pages.Detail
             }
 
         }
-        public async Task<IActionResult> OnPost(int? id)
+        public async Task<IActionResult> OnPost(int id)
         {
             Goods = Db.Goods.Find(id);
-            var autharization = await authorizationService.AuthorizeAsync(User, Goods, "CanManageGoods");
+           
             if (Goods == null)
             {
                 
                 return RedirectToPage("/index");
             }
-            if (!autharization.Succeeded)
+
+            var autharization = await authorizationService.AuthorizeAsync(User, Goods, "CanManageGoods");
+            if (autharization.Succeeded)
             {
                 Db.Goods.Remove(Goods);
                 Db.SaveChanges();

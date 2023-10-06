@@ -1,10 +1,13 @@
-﻿@page "/{quantity=1}/{pageNumber=1}"
+﻿@page "{quantity=1}/{pageNumber=1}"
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
     var pageNumber = Model.PagePagination.PageNumber;
-    ViewData["ShowButon"] = Model.ShowButton;
+    var startPage = Model.PagePagination.StartPage;
+    var endPage = Model.PagePagination.EndPage;
     var size = Model.PagePagination.PageSize;
+    var totalPage = Model.PagePagination.TotalPage;
+
 }
 
 
@@ -13,54 +16,69 @@
 <head>
     <title>Магазин товаров</title>
     <link rel="stylesheet" href="~/css/site.css">
+    <link rel="stylesheet" href="~/css/bootstrap.css" />
 </head>
-<div class="row">
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-primary" role="alert">
+        @TempData["Message"]
+    </div>
+    
+}
+
+<h1>@Model.Exchange</h1>
+<div class="cards">
 
     @foreach (var goods in Model.PagePagination.Goods)
     {
-        <div class="col-2">
-            <partial name="_CardGoodsPartial" model="goods" view-data="ViewData" />
-        </div>
+
+        <partial name="_CardGoodsPartial" model="goods" />
     }
 </div>
-@if (Model.PagePagination.PreviosPage)
-{
-    <a asp-action="OnGet"
-       asp-route-pageNumber="@(pageNumber- 1)"
-       asp-route-quantity="@size"
-       class="btn btn-outline-dark">
-        <i class="glyphicon glyphicon-chevron-left"></i>
-        Назад
-    </a>
-}
-@if (Model.PagePagination.NextPage)
-{
-    <a asp-action="OnGet"
-       asp-route-pageNumber="@(pageNumber + 1)"
-       asp-route-quantity="@size"
-       class="btn btn-outline-dark">
-        Вперед
-        <i class="glyphicon glyphicon-chevron-right"></i>
-    </a>
-}
-<a asp-action="OnGet"
-   asp-route-quantity="2"
-   asp-route-pageNumber="@(pageNumber)"
-   class="btn btn-outline-dark">
-    2
-    <i class="glyphicon glyphicon-chevron-right"></i>
-</a>
-<a asp-action="OnGet"
-   asp-route-quantity="1"
-   asp-route-pageNumber="@(pageNumber)"
-   class="btn btn-outline-dark">
-    1
-    <i class="glyphicon glyphicon-chevron-right"></i>
-</a>
 
-<script>function submitForm() {
-        document.getElementById('quantityForm').submit();
-    }</script>
+<form method="post">
+    <div class="buttom-pagin">
+        <!-- Кнопка "Назад" -->
+        @if (Model.PagePagination.PreviosPage)
+        {
+            <button type="submit" asp-route-pageNumber="@(pageNumber - 1)" class="btn btn-outline-dark">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                Назад
+            </button>
+        }
+        <button type="submit" asp-route-quantity="@size" asp-route-pageNumber="1" class="btn btn-outline-dark @(1 == pageNumber ? "active" : "")">
+            1
+        </button>
 
+
+        <!-- Кнопки для каждой страницы -->
+        @for (int i = startPage + 1; i <= endPage - 1; i++)
+        {
+            <button type="submit" asp-route-quantity="@size" asp-route-pageNumber="@i" class="btn btn-outline-dark @(i == pageNumber ? "active" : "")">
+                @i
+            </button>
+        }
+        <button type="submit" asp-route-quantity="@size" asp-route-pageNumber="@totalPage" class="btn btn-outline-dark @(totalPage == pageNumber ? "active" : "")">
+            @totalPage
+        </button>
+
+        <!-- Кнопка "Вперед" -->
+        @if (Model.PagePagination.NextPage)
+        {
+            <button type="submit" asp-route-pageNumber="@(pageNumber + 1)" class="btn btn-outline-dark">
+                Вперед
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </button>
+        }
+
+        <!-- Выбор количества (quantity) -->
+        <button type="submit" asp-route-pageNumber="@pageNumber" asp-route-quantity="1" class="btn @(size == 1 ? "btn-success" : "btn-outline-dark")">
+            1
+        </button>
+        <button type="submit" asp-route-pageNumber="@pageNumber" asp-route-quantity="2" class="btn @(size == 2 ? "btn-success" : "btn-outline-dark")">
+            2
+        </button>
+    </div>
+</form>
 </html>
 

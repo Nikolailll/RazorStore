@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -34,6 +35,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<AppDbContext>();
 
+
+builder.Services.AddHttpClient<IExchangeInt,ExchangeInt>( (HttpClient client) =>
+{
+    client.BaseAddress = new Uri("https://rest.coinapi.io/v1/");
+    client.DefaultRequestHeaders.Add("X-CoinAPI-Key", builder.Configuration["CoinApiKey"]);
+
+});
 
 
 var app = builder.Build();

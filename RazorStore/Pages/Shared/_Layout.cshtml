@@ -57,6 +57,14 @@
                             </div>
                         </div>
                     </form>
+                    <form method="post" asp-page="Detail/SearchPage">
+                        <select name="searchType">
+                            <option value="1">Опция 1</option>
+                            <option value="2">Опция 2</option>
+                            <option value="3">Опция 3</option>
+                        </select>
+                        <button type="submit">Поиск</button>
+                    </form>
                 </div>
                 <partial name="_LoginPartial" />
             </div>

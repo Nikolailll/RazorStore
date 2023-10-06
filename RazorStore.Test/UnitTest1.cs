@@ -10,7 +10,7 @@ public class UnitTest1
     public void Test_SerchAlgorithm()
     {
 
-        //var algorithm = new SearchAlgorithm();
+        
         var goods = new List<Goods>
         {
             new Goods { Name = "stasik" },
@@ -38,8 +38,9 @@ public class UnitTest1
 
         };
         var searchWords = "stasik";
-        //var actual = algorithm.Search(goods, searchWords);
-        //Assert.Equal(expected, actual);
+        var algorithm = new SearchAlgorithm();
+        var actual = algorithm.Search(searchWords, goods);
+        Assert.Equal(expected, actual);
 
     }   
 }

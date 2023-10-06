@@ -27,14 +27,16 @@ namespace RazorStore.Pages.Detail
         }
         public async Task<IActionResult> OnGet(string id)
         {
-            
+            logger.LogInformation("Goods {id}, try to access", id);
             goods = db.Goods.Where(x => x.User.Id == id);
             if (goods.Count() == 0)
             {
                 return Page();
             }
+
             var go = goods.First();
             var authorize = await authorizationService.AuthorizeAsync(User,go, "CanManageGoods");
+
             if (authorize.Succeeded)
             {
                 ShowButton = true;

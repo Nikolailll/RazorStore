@@ -45,7 +45,7 @@ namespace RazorStore.Pages.Detail
                 Goods = new Goods();
             }
         }
-        public async void OnPost()
+        public async Task<IActionResult> OnPost()
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +65,9 @@ namespace RazorStore.Pages.Detail
                     var good = db.Goods.Attach(Goods);
                     good.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     db.SaveChanges();
+                    TempData["Message"] = $"Goods name - {Goods.Name} was update";
+                    return RedirectToPage("/Index");
+
                 }
                 else
                 {
@@ -77,14 +80,18 @@ namespace RazorStore.Pages.Detail
                     else
                     {
                         logger.LogWarning("User : {name} not found", User.Identity.Name);
-                        RedirectToPage("/Account/Login");
+                        return RedirectToPage("/Account/Login");
                     }
                     
                     db.Goods.Add(Goods);
                     db.SaveChanges();
+
+                    TempData["Message"] = $"Goods name - {Goods.Name} was added";
+                    return RedirectToPage("index");
                 }
             }
-
+            TempData["Message"] = $"Goods - {Goods.Name} wasn't added";
+            return RedirectToPage("index");
 
 
 

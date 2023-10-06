@@ -1,19 +1,20 @@
 ﻿using System;
 using RazorStore.Model;
+using RazorStore.Model.Enum;
 
 namespace RazorStore.Services
 {
 	public class SearchAlgorithm : ISearchAlgorithm<Goods>
 	{
-        private AppDbContext Context { get; }
+  //      private AppDbContext Context { get; }
 
-        public SearchAlgorithm(AppDbContext context)
-		{
-            Context = context;
-        }
-        public IEnumerable<Goods> Search(string searchWords)
+  //      public SearchAlgorithm(AppDbContext context)
+		//{
+  //          Context = context;
+  //      }
+        public IEnumerable<Goods> Search(string searchWords,IEnumerable<Goods> goods )
         {
-            var goods = Context.Goods;
+            
             List<Goods> foundGoods = new();
             foreach (var item in goods)
             {

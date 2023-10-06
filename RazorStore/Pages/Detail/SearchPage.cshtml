@@ -9,21 +9,11 @@
         <title>Магазин товаров</title>
         <link rel="stylesheet" href="~/css/site.css">
     </head>
-        <div class="row">
+        <div class="cards">
 
             @foreach (var goods in Model.Goods)
             {
-                <body>
-                    <div class="product-card">
-                        <img src="/images/@goods.PicturePath" alt="Превью товара">
-                        <h2>@goods.Name</h2>
-                        <p>@goods.Price</p>
-                        <p>@goods.Subscribe</p>
-                        <p>@goods.Location</p>
-                        <a asp-page="Detail/GoodsPage" asp-route-id="@goods.Id" target="_blank">Подробнее</a>
-                    </div>
-
-                </body>
+               <partial name="_CardGoodsPartial" model="goods" />
             }
         </div>
 </html>
