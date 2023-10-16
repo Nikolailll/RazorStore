@@ -1,19 +1,44 @@
 ﻿@page
 @model RazorStore.Pages.Detail.SearchPageModel
+@addTagHelper *, RazorStore.Services
 @{
+    
+    
 }
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Магазин товаров</title>
-        <link rel="stylesheet" href="~/css/site.css">
-    </head>
+<head>
+    <title>Магазин товаров</title>
+    <link rel="stylesheet" href="~/css/site.css">
+    <link rel="stylesheet" href="~/css/bootstrap.css" />
+</head>
+        @if (Model.Goods.Count() == 0)
+        {
+            <p>Товары не найдены</p>
+        }
         <div class="cards">
 
             @foreach (var goods in Model.Goods)
             {
-               <partial name="_CardGoodsPartial" model="goods" />
+                var imagePath = $"/images/{goods.PicturePath ?? "nonPictures"}";
+                <div class="card">
+                    <div class="card__top">
+                        <a href="GoodsPage?id=@goods.Id" class="card__image">
+                            <img
+                                src="@imagePath" asp-append-version="true"
+                                alt="@goods.Name"
+                            />
+                        </a>
+                    </div>
+                    <div class="card__botom" >
+                        <div>@goods.Name </div>
+                        <div>@goods.Price</div>
+                        <div>@goods.Subscribe</div>
+                        <div>@goods.Location</div>
+                    </div>
+                    <div ></div>
+                </div>
             }
         </div>
 </html>

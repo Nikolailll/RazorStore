@@ -189,5 +189,19 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .buttom-pagin{
     padding-top:20px;
+    width: 400px;
+    
+    
+    
+}
+.cards1{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, 220px);
+    width:100%;
+    max-width:1000px;
+    justify-content:center;
+    column-gap:30px;
+    row-gap:40px;
+    margin:0 auto;
     
 }

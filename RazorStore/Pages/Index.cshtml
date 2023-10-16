@@ -36,14 +36,14 @@
     }
 </div>
 
-<form method="post">
+<form method="post" class="cards1">
     <div class="buttom-pagin">
         <!-- Кнопка "Назад" -->
         @if (Model.PagePagination.PreviosPage)
         {
             <button type="submit" asp-route-pageNumber="@(pageNumber - 1)" class="btn btn-outline-dark">
                 <i class="glyphicon glyphicon-chevron-left"></i>
-                Назад
+                &lt;
             </button>
         }
         <button type="submit" asp-route-quantity="@size" asp-route-pageNumber="1" class="btn btn-outline-dark @(1 == pageNumber ? "active" : "")">
@@ -66,18 +66,27 @@
         @if (Model.PagePagination.NextPage)
         {
             <button type="submit" asp-route-pageNumber="@(pageNumber + 1)" class="btn btn-outline-dark">
-                Вперед
+                &gt;
                 <i class="glyphicon glyphicon-chevron-right"></i>
             </button>
         }
 
         <!-- Выбор количества (quantity) -->
-        <button type="submit" asp-route-pageNumber="@pageNumber" asp-route-quantity="1" class="btn @(size == 1 ? "btn-success" : "btn-outline-dark")">
-            1
-        </button>
-        <button type="submit" asp-route-pageNumber="@pageNumber" asp-route-quantity="2" class="btn @(size == 2 ? "btn-success" : "btn-outline-dark")">
-            2
-        </button>
+        @* <button type="submit" asp-route-pageNumber="@pageNumber" asp-route-quantity="1" class="btn @(size == 1 ? "btn-success" : "btn-outline-dark")"> *@
+        @*     1 *@
+        @* </button> *@
+        @* <button type="submit"  asp-route-pageNumber="@pageNumber" asp-route-quantity="2" class="btn @(size == 2 ? "btn-success" : "btn-outline-dark")"> *@
+        @*     2 *@
+        @* </button> *@
+         <div class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              Кол
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+              <li><a class="dropdown-item" asp-route-PageNumber="@pageNumber" asp-route-quantity="1">1</a></li>
+              <li><a class="dropdown-item" asp-route-PageNumber="@pageNumber" asp-route-quantity="2">2</a></li>
+            </ul>
+          </div>
     </div>
 </form>
 </html>

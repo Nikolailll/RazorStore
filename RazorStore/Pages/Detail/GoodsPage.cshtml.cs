@@ -36,7 +36,7 @@ namespace RazorStore.Pages.Detail
             Goods = db.Goods.Find(id);
             if (signInManager.IsSignedIn(User))
             {
-                logger.LogInformation("Searc Id{id}", id);
+                logger.LogInformation("Search Id{id}", id);
                 var autharization = await authorizationService.AuthorizeAsync(User, Goods, "CanManageGoods");
                 ShowButon = autharization.Succeeded;
             }
@@ -44,10 +44,10 @@ namespace RazorStore.Pages.Detail
             return Page();
         }
 
-        public void OnPost(Goods good)
-        {
-
-        }
+        // public void OnPost(Goods good)
+        // {
+        //
+        // }
 
     }
 }
