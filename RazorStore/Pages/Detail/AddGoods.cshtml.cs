@@ -87,11 +87,11 @@ namespace RazorStore.Pages.Detail
                     db.SaveChanges();
 
                     TempData["Message"] = $"Goods name - {Goods.Name} was added";
-                    return RedirectToPage("index");
+                    return RedirectToPage("/Index");
                 }
             }
             TempData["Message"] = $"Goods - {Goods.Name} wasn't added";
-            return RedirectToPage("index");
+            return RedirectToPage("/Index");
 
 
 

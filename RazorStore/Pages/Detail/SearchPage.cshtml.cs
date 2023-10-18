@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+  using Azure;
+  using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorStore.Model;
 using RazorStore.Services;
@@ -26,9 +27,16 @@ namespace RazorStore.Pages.Detail
         {
             if(search == null)
             {
-                Goods = appDbContext.Goods;
+                Goods = appDbContext.Goods.Take(10);
                 return Page();
             }
+
+            // if (type == 0)
+            // {
+            //     Goods = appDbContext.Goods.Where(x => (int)x.Type == type);
+            //     return Page();
+            // }
+            
             logger.LogInformation("Search param {search}", search);
             Goods = appDbContext.Goods;
             Goods = searchAlgorithm.Search(search, Goods);

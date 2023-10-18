@@ -47,23 +47,23 @@
                     <li class="nav-item" if="showContent" >
                         <a class="nav-link text-dark" asp-area="" asp-route-id="@userManager.GetUserId(User)" asp-page="/Detail/MyGoods">Мои товары </a>
                     </li>
-
-
-                    <form asp-page="Detail/SearchPage" method="get">
+                    <form method="post" asp-page="Detail/SearchPage" id="searchForm">
+                        <div>
+                            <select name="searchType" class="form-select btn-primary" id="selectSearchType">
+                                <option >Категория</option>
+                                <option value="0">Auto</option>
+                                <option value="1">Hobby</option>
+                                <option value="2">Sport</option>
+                            </select>
+                        </div>
+                    </form>
+                    <form asp-page="/Detail/SearchPage" method="get">
                         <div class="input-group">
                             <input class="form-control" type="text" name="search" />
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </div>
                         </div>
-                    </form>
-                    <form method="post" asp-page="Detail/SearchPage">
-                        <select name="searchType">
-                            <option value="1">Опция 1</option>
-                            <option value="2">Опция 2</option>
-                            <option value="3">Опция 3</option>
-                        </select>
-                        <button type="submit">Поиск</button>
                     </form>
                 </div>
                 <partial name="_LoginPartial" />
@@ -85,7 +85,11 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
+    <script>
+        document.getElementById('selectSearchType').addEventListener('change', function() {
+            document.getElementById('searchForm').submit();
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
