@@ -1,7 +1,7 @@
 ﻿@page
 @model RazorStore.Pages.Detail.MyGoodsModel
 @{
-    ViewData["ShowButon"] = Model.ShowButton;
+    // ViewData["ShowButon"] = Model.ShowButton;
 }
 
 <html>
@@ -11,7 +11,7 @@
 <body>
     <h1> Ваши товары</h1>
 
-    <div>
+    <div class="cards">
         @if (Model.goods.Count() == 0)
         {
             <p>Товары не найдены</p>
@@ -21,7 +21,7 @@
             foreach (var item in Model.goods)
             {
                 <div>
-                    <partial name="_CardGoodsPartial" model="item" view-data="ViewData" />
+                    <partial name="_CardGoodsPartial" model="item" />
                 </div>
             }
         }

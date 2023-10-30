@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using RazorStore.Model;
 using RazorStore.Services;
 
@@ -33,7 +34,7 @@ namespace RazorStore.Pages.Detail
         public async Task<IActionResult> OnGet(int id)
         {
 
-            Goods = db.Goods.Find(id);
+            Goods = db.Goods.Include(x=> x.MultiplePath).FirstOrDefault(x => x.Id == id);
             if (signInManager.IsSignedIn(User))
             {
                 logger.LogInformation("Search Id{id}", id);

@@ -3,7 +3,6 @@
 @addTagHelper *, RazorStore.Services
 @{
     
-    
 }
 
 <!DOCTYPE html>
@@ -12,33 +11,43 @@
     <title>Магазин товаров</title>
     <link rel="stylesheet" href="~/css/site.css">
     <link rel="stylesheet" href="~/css/bootstrap.css" />
+    <script src="js/site.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-        @if (Model.Goods.Count() == 0)
-        {
-            <p>Товары не найдены</p>
-        }
-        <div class="cards">
+@if (Model.Goods.Count() == 0)
+{
+    <p>Товары не найдены</p>
+}
+<div class="cards">
 
-            @foreach (var goods in Model.Goods)
-            {
-                var imagePath = $"/images/{goods.PicturePath ?? "nonPictures"}";
-                <div class="card">
-                    <div class="card__top">
-                        <a href="GoodsPage?id=@goods.Id" class="card__image">
-                            <img
-                                src="@imagePath" asp-append-version="true"
-                                alt="@goods.Name"
-                            />
-                        </a>
-                    </div>
-                    <div class="card__botom" >
-                        <div>@goods.Name </div>
-                        <div>@goods.Price</div>
-                        <div>@goods.Subscribe</div>
-                        <div>@goods.Location</div>
-                    </div>
-                    <div ></div>
-                </div>
-            }
+    @foreach (var goods in Model.Goods)
+    {
+        // var imagePath = $"/images/{goods.PicturePath ?? "nonPictures"}";
+        <div class="card">
+            <div class="card__top">
+                
+                    <a href="GoodsPage?id=@goods.Id" >
+                        <div class="images">
+                            @foreach (var s in goods.MultiplePath)
+                            {
+                                var image = $"/images/{s.Path ?? "nonPictures"}";
+
+                                <img class="image" src="@image" />
+
+                            }
+                        </div>
+                    </a>
+                
+            </div>
+            <div class="card__botom">
+                <div>@goods.Name </div>
+                <div>@goods.Price</div>
+                <div>@goods.Subscribe</div>
+                <div>@goods.Location</div>
+            </div>
+            <div></div>
         </div>
+    }
+</div>
 </html>
+

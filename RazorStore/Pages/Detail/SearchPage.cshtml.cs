@@ -5,7 +5,8 @@ using System.Threading.Tasks;
   using Azure;
   using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorStore.Model;
+  using Microsoft.EntityFrameworkCore;
+  using RazorStore.Model;
 using RazorStore.Services;
 
 namespace RazorStore.Pages.Detail
@@ -27,18 +28,18 @@ namespace RazorStore.Pages.Detail
         {
             if(search == null)
             {
-                Goods = appDbContext.Goods.Take(10);
+                Goods = appDbContext.Goods.Take(10).Include(x => x.MultiplePath);
                 return Page();
             }
 
             // if (type == 0)
-            // {
+            // {    
             //     Goods = appDbContext.Goods.Where(x => (int)x.Type == type);
             //     return Page();
             // }
             
             logger.LogInformation("Search param {search}", search);
-            Goods = appDbContext.Goods;
+            Goods = appDbContext.Goods.Include(x => x.MultiplePath);
             Goods = searchAlgorithm.Search(search, Goods);
             return Page();
             
@@ -46,7 +47,7 @@ namespace RazorStore.Pages.Detail
         }
         public IActionResult OnPost(int searchType)
         {
-            Goods = appDbContext.Goods.Where(x => (int)x.Type == searchType);
+            Goods = appDbContext.Goods.Include(x=>x.MultiplePath).Where(x => (int)x.Type == searchType);
             return Page();
         }
     }

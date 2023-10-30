@@ -31,8 +31,10 @@ namespace RazorStore.Pages.Detail
         public bool ShowButon { get; set; } = false;
         [BindProperty]
         public Goods Goods { get; set; }
-        [BindProperty]
-        public IFormFile? Photo { get; set; }
+        
+        // public PathItem? MultiplePath { get; set; } 
+        [BindProperty]       
+        public IEnumerable<IFormFile>? Photo { get; set; }
         public void OnGet(int? id)
         {
             if (id > 0)
@@ -56,7 +58,17 @@ namespace RazorStore.Pages.Detail
                         var deletePath = Path.Combine(host.WebRootPath, "Image", Goods.PicturePath);
                         System.IO.File.Delete(deletePath);
                     }
-                    Goods.PicturePath = UploadPhoto();
+
+                    foreach (var i in UploadPhoto())
+                    {
+                        PathItem MultiplePath = new();
+                        MultiplePath.Good = Goods;
+                        MultiplePath.Path = i;
+                        db.PathItem.Add(MultiplePath);
+                        
+                    }
+
+                    
 
                 }
                 if(Goods.Id > 0)
@@ -97,18 +109,23 @@ namespace RazorStore.Pages.Detail
 
 
         }
-        private string UploadPhoto()
+        private List<string> UploadPhoto()
         {
-            string uniqName = null;
+            List<string> uniqName = new();
             if (Photo != null)
             {
-                var path = Path.Combine(host.WebRootPath, "images");
-                uniqName = Guid.NewGuid().ToString() + "_" + Photo.FileName;
-                var filePath = Path.Combine(path, uniqName);
-                using (var fs = new FileStream(filePath, FileMode.Create))
+                foreach (var i in Photo)
                 {
-                    Photo.CopyTo(fs);
+                    var path = Path.Combine(host.WebRootPath, "images");
+                    var uniqNames = Guid.NewGuid().ToString() + "_" + i.FileName;
+                    uniqName.Add(uniqNames);
+                    var filePath = Path.Combine(path, uniqNames);
+                    using (var fs = new FileStream(filePath, FileMode.Create))
+                    {
+                        i.CopyTo(fs);
+                    }
                 }
+                
 
             }
             return uniqName;

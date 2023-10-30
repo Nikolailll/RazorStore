@@ -15,7 +15,7 @@ namespace RazorStore.Services.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.10");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.11");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -190,6 +190,26 @@ namespace RazorStore.Services.Migrations
                     b.ToTable("Goods");
                 });
 
+            modelBuilder.Entity("RazorStore.Model.PathItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("GoodId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GoodId");
+
+                    b.ToTable("PathItem");
+                });
+
             modelBuilder.Entity("RazorStore.Model.User", b =>
                 {
                     b.Property<string>("Id")
@@ -312,6 +332,20 @@ namespace RazorStore.Services.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("RazorStore.Model.PathItem", b =>
+                {
+                    b.HasOne("RazorStore.Model.Goods", "Good")
+                        .WithMany("MultiplePath")
+                        .HasForeignKey("GoodId");
+
+                    b.Navigation("Good");
+                });
+
+            modelBuilder.Entity("RazorStore.Model.Goods", b =>
+                {
+                    b.Navigation("MultiplePath");
                 });
 
             modelBuilder.Entity("RazorStore.Model.User", b =>

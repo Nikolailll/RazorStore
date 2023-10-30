@@ -5,6 +5,7 @@ namespace RazorStore.Model
 {
 	public class Goods
 	{
+		
 		public int Id { get; set; }
 		
 		public string Name { get; set; }
@@ -15,7 +16,7 @@ namespace RazorStore.Model
 		public string Location { get; set; }
 		public bool Delete { get; set; } = false;
 		public User? User { get; set; }
-
+		public List<PathItem>? MultiplePath { get; set; }
 	}
 }
 

@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id?}"
 @model RazorStore.Pages.Detail.GoodsPageModel
 @{
     var picturePath = $"/images/{Model.Goods.PicturePath ?? "nonPictures"}";
@@ -8,34 +8,60 @@
 <html>
 <head>      
     <title>Страница товара</title>
-    <link rel="stylesheet" href="~/css/site.css">
+    @* <link rel="stylesheet" href="~/css/site.css"> *@
+    <link rel="stylesheet" href="~/css/Page.css">
+    <script src="js/script.js"></script>
 </head>
-<body>
-    <div class="product-details">
-        <h2>@Model.Goods.Name</h2>
-        <img src="@picturePath" alt="Изображение товара">
 
-        <h3>Описание</h3>
-        <p>@Model.Goods.Subscribe</p>
+ <div class="container">
+     <div class="column">
+         <div class="slider">
+           <div class="slider-list">
+               <div class="slider-track">
+                   @foreach (var s in Model.Goods.MultiplePath)
+                   {
+                       var image = $"/images/{s.Path ?? "nonPictures"}";
+                       <div class="slide">
+                           <img  src="@image" alt="Pic"/>
+                       </div>
+                   }
+               </div>
+           </div>
+           <div class="slider-arrows">
+             <button type="button" class="prev">&larr;</button>
+             <button type="button" class="next">&rarr;</button>
+           </div>
+         </div>
+     </div>
+    <div class="column">
+        <div class="product-details">
+            <div>
+                <h2>@Model.Goods.Name</h2>
+            </div>
+            <div>
+                <h3>Описание</h3>
+                <p>@Model.Goods.Subscribe</p>
+            </div>
+            <div>
+                <h3>Адрес</h3>
+                <p>@Model.Goods.Location</p>
+            </div>
+            <div>
+                <h3>Цена</h3>
+                <p>@Model.Goods.Price</p>
+            </div>
+        </div>
+        @if (Model.ShowButon)
+        {
+            <a asp-page="/Detail/Delete" asp-route-id="@Model.Goods.Id">
+                <input type="submit" value="Удалить"/>
+            </a>
+            <a asp-page="/Detail/AddGoods" asp-route-id="@Model.Goods.Id">
+                <input type="submit" value="Обновить"/>
+            </a>
 
-        <h3>Адрес</h3>
-        <p>@Model.Goods.Location</p>
-
-        <h3>Цена</h3>
-        <p>@Model.Goods.Price</p>
+        }
     </div>
-    @if (Model.ShowButon)
-    {
-        <a asp-page="/Detail/Delete" asp-route-id="@Model.Goods.Id">
-            <input type="submit" value="Удалить" />
-        </a>
-
-
-        <a asp-page="/Detail/AddGoods" asp-route-id="@Model.Goods.Id">
-            <input type="submit" value="Обновить" />
-        </a>
-
-    }
-</body>
+</div>
 
 </html>

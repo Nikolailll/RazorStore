@@ -60,57 +60,7 @@ background-color: #f4f1f3;
     .product-card a:hover {
         background-color: #1c6db9;
     }
-/* site.css */
 
-/*body {
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
-margin: 0;
-}
-
-.product-form {
-width: 400px;
-padding: 20px;
-border: 1px solid #ccc;
-border-radius: 10px;
-background-color: #fff;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.product-form h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.product-form form {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-}
-
-.product-form label {
-    font-weight: bold;
-}
-
-.product-form input,
-.product-form select,
-.product-form textarea {
-    margin-bottom: 10px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.product-form select {
-    height: 40px;
-}
-*/
-/*.card-img {
-    width:50px;
-    height: 50px;
-}*/
 .card-img {
     max-width: 100%;
     height: auto;
@@ -162,8 +112,8 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .card__image > img{
     width:100%;
-    height:100%;
-    object-fit:contain;
+    /*height:100%;*/
+    /*object-fit:contain;*/
     transition:0.2s;
 }
 .card__image:hover > img{
@@ -190,18 +140,77 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 .buttom-pagin{
     padding-top:20px;
     width: 400px;
+    margin-left: 160px;
+}
+
+
+.hvr__images {
+    position: relative;
+    height: 190px;
+    width: 200px;
+}
+.hvr{
+    width: 100%;
+    height: 100%;
+}
+.hvr__sectors {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+}
+
+.hvr__sector {
+    flex-grow: 1;
     
+}
+
+/* не обязательные стили */
+
+
+
+.images {
+    display: flex;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    
+   
+}
+
+.image {
+    display: block;
+    width: 200px;
+    height: 190px;
+          
     
     
 }
-.cards1{
-    display:grid;
-    grid-template-columns:repeat(auto-fill, 220px);
-    width:100%;
-    max-width:1000px;
-    justify-content:center;
-    column-gap:30px;
-    row-gap:40px;
-    margin:0 auto;
-    
+
+.hvr__dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.hvr__dot {
+    width: 5px;
+    height: 5px;
+    margin: 10px 2px 0;
+    border-radius: 50%;
+    background: #d6dbe0;
+}
+
+.hvr__dot--active {
+    background: #000;
+}
+
+
+
+
+
+
+
+

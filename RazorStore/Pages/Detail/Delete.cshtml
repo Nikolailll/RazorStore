@@ -17,12 +17,12 @@
     <p>Тип: @Model.Goods.Type</p>
     <p>Местоположение: @Model.Goods.Location</p>
 
-    <!-- Форма для удаления товара -->
+    
     <form method="post">
-        <!-- Здесь вы можете добавить скрытое поле с ID товара -->
+       
         <input type="hidden" name="product_id" asp-for="Goods.Id">
 
-        <!-- Кнопка для отправки формы -->
+        
         <button type="submit">Удалить товар</button>
     </form>
 </body>

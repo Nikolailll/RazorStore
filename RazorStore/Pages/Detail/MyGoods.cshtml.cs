@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using RazorStore.Model;
 using RazorStore.Services;
 
@@ -28,7 +29,7 @@ namespace RazorStore.Pages.Detail
         public async Task<IActionResult> OnGet(string id)
         {
             logger.LogInformation("Goods {id}, try to access", id);
-            goods = db.Goods.Where(x => x.User.Id == id);
+            goods = db.Goods.Where(x => x.User.Id == id).Include(x => x.MultiplePath);
             if (goods.Count() == 0)
             {
                 return Page();

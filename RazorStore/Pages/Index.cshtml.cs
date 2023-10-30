@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using RazorStore.Model;
 using RazorStore.Services;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace RazorStore.Pages;
 
@@ -30,19 +31,20 @@ public class IndexModel : PageModel
 
     public async Task<IActionResult> OnGet(int quantity = 1, int pageNumber = 1)
     {
+        var ss = db.Goods.Include(x => x.MultiplePath);
         //var response = await exchangeInt.GetLatest("BTC", "USD");
         //if(!(response == "Failed"))
         //{
         //    var ss = JsonConvert.DeserializeObject<Exchange>(response);
         //    Exchange = ss.Rate;
         //}
-        PagePagination = new PagePagination<Goods>(db.Goods, quantity, pageNumber);
+        PagePagination = new PagePagination<Goods>(ss, quantity, pageNumber);
         return Page();
     }
     public void OnPost(int quantity, int pageNumber)
     {
-
-       PagePagination = new PagePagination<Goods>(db.Goods, quantity, pageNumber);
+        var ss = db.Goods.Include(x => x.MultiplePath);
+       PagePagination = new PagePagination<Goods>(ss, quantity, pageNumber);
 
 
     }

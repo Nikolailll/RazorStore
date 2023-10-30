@@ -9,57 +9,59 @@
 }
 
 
-
-<form method="post" enctype="multipart/form-data">
-    <input type="hidden" asp-for="Goods.Id" />
-    <div class="form-group">
-        <label asp-for="Goods.Name"></label>
-        <input asp-for="Goods.Name" class="form-control" required />
-    </div>
-    <div class="form-group">
-        <label asp-for="Goods.Price"></label>
-        <input asp-for="Goods.Price" class="form-control" required />
-    </div>
-    <div class="form-group">
-        <label asp-for="Goods.Subscribe"></label>
-        <textarea asp-for="Goods.Subscribe" class="form-control" rows="4" required></textarea>
-    </div>
-    <div class="form-group">
-        <label asp-for="Goods.Type"></label>
-        <select asp-for="Goods.Type" class="form-control" required>
-            <option value="Auto">Auto</option>
-            <option value="Hobby">Hobby</option>
-            <option value="Sport">Sport</option>
-            <option value="Realestate">Realestate</option>
-            <option value="Technic">Technic</option>
-            <option value="Pets">Pets</option>
-            <option value="Used">Used</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label asp-for="Goods.Location"></label>
-        <input asp-for="Goods.Location" class="form-control" required />
-    </div>
-    @*<div class="form-group">
-            <label>Загрузить картинку:</label>
-            <input type="file" name="ImageFile" class="form-control-file" accept="image/*" required />
-        </div>*@
-    <div class="form-group">
-        <label>Превью:</label>
-        <img class="card-img top border border-primary" src="@imagePath" asp-append-version="true" />
-        <div class="custom-file">
-            <input asp-for="Photo" class="custom-file-input form-control" />
-            <label class="custom-file-label text-left">Выберите файл</label>
+<div>
+    <form method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Goods.Id" />
+        <div class="form-group">
+            <label asp-for="Goods.Name"></label>
+            <input asp-for="Goods.Name" class="form-control" required />
         </div>
-    </div>
+        <div class="form-group">
+            <label asp-for="Goods.Price"></label>
+            <input asp-for="Goods.Price" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label asp-for="Goods.Subscribe"></label>
+            <textarea asp-for="Goods.Subscribe" class="form-control" rows="4" required></textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="Goods.Type"></label>
+            <select asp-for="Goods.Type" class="form-control" required>
+                <option value="Auto">Auto</option>
+                <option value="Hobby">Hobby</option>
+                <option value="Sport">Sport</option>
+                <option value="Realestate">Realestate</option>
+                <option value="Technic">Technic</option>
+                <option value="Pets">Pets</option>
+                <option value="Used">Used</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Goods.Location"></label>
+            <input asp-for="Goods.Location" class="form-control" required />
+        </div>
+        @*<div class="form-group">
+                <label>Загрузить картинку:</label>
+                <input type="file" name="ImageFile" class="form-control-file" accept="image/*" required />
+            </div>*@
+        <div class="form-group">
+            <label>Превью:</label>
+            <img class="card-img top border border-primary" src="@imagePath" asp-append-version="true" />
+            <div class="form-group">
+                <label>Фотографии:</label>
+                <input asp-for="Photo" type="file" class="custom-file-input form-control" multiple />
+                <label class="custom-file-label text-left">Выберите файлы</label>
+            </div>
+        </div>
 
-    @if (Model.ShowButon)
-    {
-        <button type="submit" class="btn btn-primary">Обновить</button>
-    }
-    else
-    {
-        <button type="submit" class="btn btn-primary">Добавить товар</button>
-    }
+        @if (Model.ShowButon)
+        {
+            <button type="submit" class="btn btn-primary">Обновить</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-primary">Добавить товар</button>
+        }
 
-</form>
+    </form>
+</div>

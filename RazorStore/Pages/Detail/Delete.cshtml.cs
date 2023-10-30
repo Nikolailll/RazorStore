@@ -54,10 +54,13 @@ namespace RazorStore.Pages.Detail
             var autharization = await authorizationService.AuthorizeAsync(User, Goods, "CanManageGoods");
             if (autharization.Succeeded)
             {
-                Db.Goods.Remove(Goods);
+                Goods.Delete = true;
+                var good = Db.Goods.Attach(Goods);
+                good.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 Db.SaveChanges();
 
             }
+            TempData["Message"] = $"{Goods.Name} was delete";
             return RedirectToPage("/index");
 
         }

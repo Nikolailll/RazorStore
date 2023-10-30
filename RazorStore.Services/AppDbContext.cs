@@ -13,6 +13,7 @@ namespace RazorStore.Services
 			
 		}
 		public DbSet<Goods> Goods { get; set; }
+		public DbSet<PathItem> PathItem { get; set; }
 
         protected override void OnModelCreating(ModelBuilder model)
 		{

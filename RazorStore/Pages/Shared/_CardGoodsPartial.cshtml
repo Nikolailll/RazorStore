@@ -1,21 +1,32 @@
 ﻿@model Goods
 @using Microsoft.AspNetCore.Mvc.TagHelpers 
+@using Microsoft.CodeAnalysis.Scripting
 @addTagHelper *, RazorStore.Services
 @{
     
     var imagePath = $"/images/{Model.PicturePath ?? "nonPictures"}";
-    
+    var showButton = Model.MultiplePath.Count > 0;
 }
-
+<head>
+    <link rel="stylesheet" href="css/flexslider.css"/>
+    <script src="js/jquery.flexslider.js"></script>
+</head>
 
 <div class="card">
     <div class="card__top">
-        <a asp-page="Detail/GoodsPage" asp-route-id="@Model.Id" class="card__image">
-            <img
-                 src="@imagePath" asp-append-version="true"
-                 alt="@Model.Name"
-             />
-        </a>
+        <div class="slider-container">
+           <a asp-area="" asp-page="/Detail/GoodsPage" asp-route-ID="@Model.Id" >
+               <div class="images">
+                   @foreach (var s in Model.MultiplePath)
+                   {
+                       var image = $"/images/{s.Path ?? "nonPictures"}";
+
+                       <img class="image" src="@image" alt="Pic"/>
+
+                   }
+               </div>
+           </a>
+       </div>
     </div>
     <div class="card__botom" >
         <div>@Model.Name </div>
@@ -25,3 +36,4 @@
     </div>
     <div ></div>
 </div>
+
