@@ -27,12 +27,11 @@ namespace RazorStore.Pages.Detail
         }
         public async Task<IActionResult> OnGet(int? id)
         {
-
             Goods = Db.Goods.Find(id);
-
+            
             if (Goods == null)
             {
-                logger.LogWarning("Goods Id : {id} dosen't exist", id);
+                logger.LogWarning("Goods Id : {id} doesn't exist", id);
                 return RedirectToPage("/Error");
             }
             else

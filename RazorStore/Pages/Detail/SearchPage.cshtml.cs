@@ -31,12 +31,6 @@ namespace RazorStore.Pages.Detail
                 Goods = appDbContext.Goods.Take(10).Include(x => x.MultiplePath);
                 return Page();
             }
-
-            // if (type == 0)
-            // {    
-            //     Goods = appDbContext.Goods.Where(x => (int)x.Type == type);
-            //     return Page();
-            // }
             
             logger.LogInformation("Search param {search}", search);
             Goods = appDbContext.Goods.Include(x => x.MultiplePath);

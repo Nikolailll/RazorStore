@@ -1,9 +1,7 @@
 ﻿@page "{id:min(1)?}/{handler?}"
 @model RazorStore.Pages.Detail.AddGoodsModel
 @using RazorStore.Model
-@*@inject UserManager<User> users*@
 @{
-
     var imagePath = $"/images/{Model.Goods.PicturePath ?? "nonPictures"}";
     ViewData["Title"] = "Add";
 }
@@ -40,10 +38,6 @@
             <label asp-for="Goods.Location"></label>
             <input asp-for="Goods.Location" class="form-control" required />
         </div>
-        @*<div class="form-group">
-                <label>Загрузить картинку:</label>
-                <input type="file" name="ImageFile" class="form-control-file" accept="image/*" required />
-            </div>*@
         <div class="form-group">
             <label>Превью:</label>
             <img class="card-img top border border-primary" src="@imagePath" asp-append-version="true" />
@@ -62,6 +56,5 @@
         {
             <button type="submit" class="btn btn-primary">Добавить товар</button>
         }
-
     </form>
 </div>

@@ -44,11 +44,5 @@ namespace RazorStore.Pages.Detail
 
             return Page();
         }
-
-        // public void OnPost(Goods good)
-        // {
-        //
-        // }
-
     }
 }

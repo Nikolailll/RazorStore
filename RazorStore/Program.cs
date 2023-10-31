@@ -27,6 +27,7 @@ builder.Services.AddScoped<IAuthorizationHandler, IsGoodDeleteHandler>();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddScoped<ISearchAlgorithm<Goods>, SearchAlgorithm>();
+builder.Services.AddScoped<IUploadPhoto,UploadPhoto>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {

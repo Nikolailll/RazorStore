@@ -29,7 +29,8 @@ namespace RazorStore.Pages.Detail
         public async Task<IActionResult> OnGet(string id)
         {
             logger.LogInformation("Goods {id}, try to access", id);
-            goods = db.Goods.Where(x => x.User.Id == id).Include(x => x.MultiplePath);
+            goods = db.Goods.Where(x => x.User.Id == id)
+                            .Include(x => x.MultiplePath);
             if (goods.Count() == 0)
             {
                 return Page();

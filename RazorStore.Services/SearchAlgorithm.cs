@@ -6,12 +6,6 @@ namespace RazorStore.Services
 {
 	public class SearchAlgorithm : ISearchAlgorithm<Goods>
 	{
-  //      private AppDbContext Context { get; }
-
-  //      public SearchAlgorithm(AppDbContext context)
-		//{
-  //          Context = context;
-  //      }
         public IEnumerable<Goods> Search(string searchWords,IEnumerable<Goods> goods )
         {
             

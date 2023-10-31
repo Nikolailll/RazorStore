@@ -1,0 +1,8 @@
+﻿services:
+  razorstore:
+    image: razorstore
+    build:
+      context: .
+      dockerfile: RazorStore/Dockerfile
+
+  

@@ -16,23 +16,23 @@ namespace RazorStore.Pages.Detail
         private readonly AppDbContext db;
         private readonly IWebHostEnvironment host;
         private readonly UserManager<User> _user;
-        private readonly IAuthorizationService authorizationService;
+        private readonly IUploadPhoto photos;
         private readonly ILogger<AddGoodsModel> logger;
 
         public AddGoodsModel(AppDbContext db, IWebHostEnvironment host,
-            UserManager<User> user, IAuthorizationService authorizationService, ILogger<AddGoodsModel> logger)
+            UserManager<User> user, IAuthorizationService authorizationService, ILogger<AddGoodsModel> logger, IUploadPhoto photos)
         {
             this.db = db;
             this.host = host;
             this._user = user;
-            this.authorizationService = authorizationService;
             this.logger = logger;
+            this.photos = photos;
         }
         public bool ShowButon { get; set; } = false;
         [BindProperty]
         public Goods Goods { get; set; }
         
-        // public PathItem? MultiplePath { get; set; } 
+       
         [BindProperty]       
         public IEnumerable<IFormFile>? Photo { get; set; }
         public void OnGet(int? id)
@@ -58,8 +58,7 @@ namespace RazorStore.Pages.Detail
                         var deletePath = Path.Combine(host.WebRootPath, "Image", Goods.PicturePath);
                         System.IO.File.Delete(deletePath);
                     }
-
-                    foreach (var i in UploadPhoto())
+                    foreach (var i in photos.UploadPhotos(Photo,host))
                     {
                         PathItem MultiplePath = new();
                         MultiplePath.Good = Goods;
@@ -67,9 +66,6 @@ namespace RazorStore.Pages.Detail
                         db.PathItem.Add(MultiplePath);
                         
                     }
-
-                    
-
                 }
                 if(Goods.Id > 0)
                 {
@@ -79,11 +75,9 @@ namespace RazorStore.Pages.Detail
                     db.SaveChanges();
                     TempData["Message"] = $"Goods name - {Goods.Name} was update";
                     return RedirectToPage("/Index");
-
                 }
                 else
                 {
-                   
                     var users = await _user.GetUserAsync(User);
                     if(users != null)
                     {
@@ -104,32 +98,6 @@ namespace RazorStore.Pages.Detail
             }
             TempData["Message"] = $"Goods - {Goods.Name} wasn't added";
             return RedirectToPage("/Index");
-
-
-
-
-        }
-        private List<string> UploadPhoto()
-        {
-            List<string> uniqName = new();
-            if (Photo != null)
-            {
-                foreach (var i in Photo)
-                {
-                    var path = Path.Combine(host.WebRootPath, "images");
-                    var uniqNames = Guid.NewGuid().ToString() + "_" + i.FileName;
-                    uniqName.Add(uniqNames);
-                    var filePath = Path.Combine(path, uniqNames);
-                    using (var fs = new FileStream(filePath, FileMode.Create))
-                    {
-                        i.CopyTo(fs);
-                    }
-                }
-                
-
-            }
-            return uniqName;
-
         }
     }
 }
