@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using RazorStore.Model;
 using RazorStore.Services;
 
@@ -42,7 +43,7 @@ namespace RazorStore.Pages.Detail
         }
         public async Task<IActionResult> OnPost(int id)
         {
-            Goods = Db.Goods.Find(id);
+            Goods = Db.Goods.Include(x => x.User).FirstOrDefault(x => x.Id == id);
            
             if (Goods == null)
             {
@@ -52,7 +53,7 @@ namespace RazorStore.Pages.Detail
 
             var autharization = await authorizationService.AuthorizeAsync(User, Goods, "CanManageGoods");
             if (autharization.Succeeded)
-            {
+                    {
                 Goods.Delete = true;
                 var good = Db.Goods.Attach(Goods);
                 good.State = Microsoft.EntityFrameworkCore.EntityState.Modified;

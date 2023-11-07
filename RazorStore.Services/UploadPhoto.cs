@@ -25,7 +25,7 @@ public class UploadPhoto : IUploadPhoto
                     i.CopyTo(fs);
                 }
             }
-                
+            
 
         }
         return uniqName;
